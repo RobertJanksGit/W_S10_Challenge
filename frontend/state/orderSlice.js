@@ -7,7 +7,7 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     toggleDisplayAll(state) {
-      state.displayAllOrders = !state.displayAllOrders;
+      state.displayAllOrders = true;
     },
     setDisplaySize(state, action) {
       state.displayAllOrders = false;
