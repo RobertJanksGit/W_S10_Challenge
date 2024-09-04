@@ -10,13 +10,14 @@ export const ordersApi = createApi({
       providesTags: ["Orders"],
     }),
     createOrder: build.mutation({
-      query: ({ name, size, toppings }) => ({
+      query: (order) => ({
         url: "order",
         method: "POST",
-        body: { fullName: name, size, toppings },
+        body: order,
       }),
+      invalidatesTags: ["Orders"],
     }),
   }),
 });
 
-export const { useGetOrders, useCreateOrder } = ordersApi;
+export const { useGetOrdersQuery, useCreateOrderMutation } = ordersApi;
