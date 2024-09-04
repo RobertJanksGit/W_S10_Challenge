@@ -59,6 +59,7 @@ export default function PizzaForm() {
       }
     }
     const { fullName, size } = state;
+    setTimeout(() => {});
     createOrder({ fullName, size, toppings })
       .unwrap()
       .then(() => {
@@ -70,11 +71,9 @@ export default function PizzaForm() {
   return (
     <form onSubmit={onSubmit}>
       <h2>Pizza Form</h2>
-      {createOrderLoading && (
-        <div className="pending">Order in progress...</div>
-      )}
+      {createOrderLoading && <div className="pending">Order in progress</div>}
       {createOrderError && (
-        <div className="failure">Order failed: fullName is required</div>
+        <div className="failure">{createOrderError.data.message}</div>
       )}
 
       <div className="input-group">

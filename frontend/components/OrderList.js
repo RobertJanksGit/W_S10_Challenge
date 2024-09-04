@@ -29,7 +29,11 @@ export default function OrderList() {
           .map((order, idx) => {
             return (
               <li key={idx}>
-                <div>{`${order.customer} ordered a size ${order.size} with ${order.toppings.length} toppings`}</div>
+                {order.toppings ? (
+                  <div>{`${order.customer} ordered a size ${order.size} with ${order.toppings.length} toppings`}</div>
+                ) : (
+                  <div>{`${order.customer} ordered a size ${order.size} with no toppings`}</div>
+                )}
               </li>
             );
           })}
@@ -37,15 +41,25 @@ export default function OrderList() {
       <div id="sizeFilters">
         Filter by size:
         {["All", "S", "M", "L"].map((size) => {
-          const className = `button-filter${size === "All" ? " active" : ""}`;
-          const action =
-            size === "All" ? toggleDisplayAll() : setDisplaySize(size);
+          const className =
+            size === "All" && displayAllOrders
+              ? "button-filter active"
+              : size === displayOrderSize
+              ? "button-filter active"
+              : "button-filter";
+
+          const handleClick = () => {
+            if (size === "All") {
+              dispatch(toggleDisplayAll());
+              // dispatch("");
+            } else {
+              dispatch(setDisplaySize(size));
+            }
+          };
+
           return (
             <button
-              onClick={() => {
-                dispatch(action);
-                console.log(displayAllOrders, displayOrderSize);
-              }}
+              onClick={handleClick}
               data-testid={`filterBtn${size}`}
               className={className}
               key={size}

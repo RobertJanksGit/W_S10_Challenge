@@ -9,3 +9,15 @@ export const store = configureStore({
   },
   middleware: (getDefault) => getDefault().concat(ordersApi.middleware),
 });
+
+export const resetStore = () => {
+  const newStore = configureStore({
+    reducer: {
+      orderState: orderReducer,
+      [ordersApi.reducerPath]: ordersApi.reducer,
+    },
+    middleware: (getDefault) => getDefault().concat(ordersApi.middleware),
+  });
+
+  return newStore;
+};

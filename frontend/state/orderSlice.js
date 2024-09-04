@@ -8,6 +8,7 @@ export const orderSlice = createSlice({
   reducers: {
     toggleDisplayAll(state) {
       state.displayAllOrders = true;
+      state.displaySize = "";
     },
     setDisplaySize(state, action) {
       state.displayAllOrders = false;
